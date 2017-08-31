@@ -348,6 +348,38 @@ public class LinkListChapter {
         // return p;
     }
 
+    public static boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) return false;
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) return true;
+        }
+        return false;
+    }
+
+    public static ListNode detectCycle(ListNode head) {
+        if (head == null || head.next == null || head.next.next == null) return null;
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                break;
+            }
+        }
+        if (slow != fast) return null;
+        fast = head;
+        while (fast != slow && slow.next != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return fast;
+    }
+
 
 
 
